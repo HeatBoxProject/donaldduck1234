@@ -1,3 +1,4 @@
+
 <html>
 <title>Heat</title>
 <meta charset="UTF-8">
@@ -57,29 +58,40 @@ body {font-size:16px;}
     </style>
     </head> 
 
-    <body>
-    <center><h2>SensorData</h2></center>
-    <table>
-      <tr>
-        <th>ID</th>
-        <th>Temperature</th>
-        <th>Humidity</th>
-        <th>Time</th>
-      </tr>
-      
-      {%for row in rows%}
-        <tr>
-          <td>{{row["iD"]}}</td>
-          <td>{{row["Temperature"]}}</td>
-          <td> {{row["Humidty"]}}</td>
-          <td>{{row[Time]}}</td>	
-        </tr>
-      {% endfor %}
-    </table>
-</div>
-<div>
+
    
+  
+  
+  
+<?php
+  $server = mysql_connect("localhost", "id5154569_th", "jhonhenry"); 
+  $db = mysql_select_db("id5154569_temphumid", $server); 
+  $query = mysql_query("SELECT * FROM weather"); 
+?>
+
+         <table>
+             <center><h2>SensorData</h2></center>
+            <tr>
+                <th>ID</th>
+                <th>Temperature</th>
+                <th>Humidity</th>
+                <th>Time</th>
+                
+            </tr>
+            <?php
+               while ($row = mysql_fetch_array($query)) {
+                   echo "<tr>";
+                   echo "<td>".$row['id']."</td>";
+                   echo "<td>".$row['temp']."</td>";
+                   echo "<td>".$row['hum']."</td>";
+                   echo "<td>".$row['time']."</td>";
+                   echo "</tr>";
+               }
+            ?>
+  
+        </table>
 </div>
+
 <script>
 // Script to open and close sidebar
 function w3_open() {
